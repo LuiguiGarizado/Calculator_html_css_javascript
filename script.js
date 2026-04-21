@@ -1,16 +1,17 @@
-// 1. Seleccionamos las 4 pantallas
-let num1Input = document.getElementById("num1");
-let signInput = document.getElementById("sign");
-let num2Input = document.getElementById("num2");
-let resultInput = document.getElementById("result");
+// 1. Usamos 'const' porque estas pantallas siempre serán las mismas, tal como lo explicó tu profesor
+const num1Input = document.getElementById("num1");
+const signInput = document.getElementById("sign");
+const num2Input = document.getElementById("num2");
+const resultInput = document.getElementById("result");
 
-// 2. Seleccionamos todos los botones
-let buttons = document.getElementsByClassName("btn");
+// 2. Usamos 'const' también para la lista de botones
+const buttons = document.getElementsByClassName("btn");
 
-// 3. Usamos un ciclo 'for' tradicional para darle función a cada botón
-for (let i = 0; i < buttons.length; i++) {
+// 3. Usamos 'var' para el contador (i) porque su valor va a ir cambiando (0, 1, 2, 3...)
+for (var i = 0; i < buttons.length; i++) {
   buttons[i].onclick = function () {
-    let valorDelBoton = this.textContent;
+    // Usamos 'const' aquí porque el valor del botón que presionamos no cambia durante este clic
+    const valorDelBoton = this.textContent;
 
     // BOTÓN BORRAR TODO (C)
     if (this.id === "c") {
@@ -51,10 +52,12 @@ for (let i = 0; i < buttons.length; i++) {
         signInput.value !== "" &&
         num2Input.value !== ""
       ) {
-        // Convertimos el texto a números reales con parseFloat
-        let numero1 = parseFloat(num1Input.value);
-        let numero2 = parseFloat(num2Input.value);
-        let resultadoFinal = 0;
+        // Convertimos el texto a números y usamos 'const' porque estos no cambiarán aquí
+        const numero1 = parseFloat(num1Input.value);
+        const numero2 = parseFloat(num2Input.value);
+
+        // Usamos 'var' para el resultado final porque su valor va a cambiar dependiendo de la operación
+        var resultadoFinal = 0;
 
         // Lógica matemática básica (lo que el profe quiere ver)
         if (signInput.value === "+") {
