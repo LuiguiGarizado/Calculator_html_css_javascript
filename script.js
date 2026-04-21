@@ -1,102 +1,112 @@
-const num1Input   = document.getElementById('num1');
-const signInput   = document.getElementById('sign');
-const num2Input   = document.getElementById('num2');
-const resultInput = document.getElementById('result');
+// 1. Seleccionamos las 4 pantallas
+let num1Input = document.getElementById("num1");
+let signInput = document.getElementById("sign");
+let num2Input = document.getElementById("num2");
+let resultInput = document.getElementById("result");
 
-const buttons = document.querySelectorAll('.btn');
+// 2. Seleccionamos todos los botones
+let buttons = document.getElementsByClassName("btn");
 
-let currentStage = 'num1';
+// 3. Usamos un ciclo 'for' tradicional para darle función a cada botón
+for (let i = 0; i < buttons.length; i++) {
+  buttons[i].onclick = function () {
+    let valorDelBoton = this.textContent;
 
-buttons.forEach(btn => btn.addEventListener('click', () => handleClick(btn)));
-
-function handleClick(button){
-  const value = button.textContent;
-
-  if(button.id === 'c'){
-    clearAll();
-    return;
-  }
-
-  if(button.id === 'delete'){
-    backspace();
-    return;
-  }
-
-  if(button.id === 'equal'){
-    calculate();
-    currentStage = 'result';
-    return;
-  }
-
-  if(isOperator(value)){
-    if(!num1Input.value) return;         
-    if(!signInput.value){                
-      signInput.value = value;
-      currentStage = 'num2';
-    }else{                               
-      calculate();
-      clearExceptResult();                
-      signInput.value = value;
-      currentStage = 'num2';
+    // BOTÓN BORRAR TODO (C)
+    if (this.id === "c") {
+      num1Input.value = "";
+      signInput.value = "";
+      num2Input.value = "";
+      resultInput.value = "";
     }
-    return;
-  }
 
-  if(currentStage === 'num1'){
-    num1Input.value += value;
-  }else if(currentStage === 'num2'){
-    num2Input.value += value;
-  }else if(currentStage === 'result'){    
-    clearAll();
-    num1Input.value = value;
-    currentStage = 'num1';
-  }
-}
-
-function isOperator(val){
-  return ['+','-','*','/'].includes(val);
-}
-
-function clearAll(){
-  num1Input.value   = '';
-  signInput.value   = '';
-  num2Input.value   = '';
-  resultInput.value = '';
-  currentStage      = 'num1';
-}
-
-function clearExceptResult(){
-  num1Input.value   = resultInput.value;
-  signInput.value   = '';
-  num2Input.value   = '';
-  resultInput.value = '';
-}
-
-function backspace(){
-  if(currentStage === 'num1'){
-    num1Input.value = num1Input.value.slice(0,-1);
-  }
-  else if(currentStage === 'num2'){
-    if(num2Input.value.length){
-      num2Input.value = num2Input.value.slice(0,-1);
-    }else{              
-      signInput.value = '';
-      currentStage = 'num1';
+    // BOTÓN RETROCESO (Borrar un número)
+    else if (this.id === "delete") {
+      // Si hay resultado, borramos todo
+      if (resultInput.value !== "") {
+        num1Input.value = "";
+        signInput.value = "";
+        num2Input.value = "";
+        resultInput.value = "";
+      }
+      // Si estamos escribiendo el numero 2
+      else if (num2Input.value !== "") {
+        num2Input.value = num2Input.value.slice(0, -1);
+      }
+      // Si ya hay signo pero no numero 2, borramos el signo
+      else if (signInput.value !== "") {
+        signInput.value = "";
+      }
+      // Si estamos en el numero 1
+      else {
+        num1Input.value = num1Input.value.slice(0, -1);
+      }
     }
-  }
-  else if(currentStage === 'result'){
-    clearAll();       
-  }
-}
 
-function calculate(){
-  if(num1Input.value && signInput.value && num2Input.value){
-    const expression = `${num1Input.value}${signInput.value}${num2Input.value}`;
-    try{
-      const res = eval(expression);
-      resultInput.value = (isFinite(res)) ? res : 'ERROR';
-    }catch{
-      resultInput.value = 'ERROR';
+    // BOTÓN IGUAL (=) : Aquí hacemos la matemática paso a paso
+    else if (this.id === "equal") {
+      // Solo calculamos si tenemos número 1, el signo y número 2
+      if (
+        num1Input.value !== "" &&
+        signInput.value !== "" &&
+        num2Input.value !== ""
+      ) {
+        // Convertimos el texto a números reales con parseFloat
+        let numero1 = parseFloat(num1Input.value);
+        let numero2 = parseFloat(num2Input.value);
+        let resultadoFinal = 0;
+
+        // Lógica matemática básica (lo que el profe quiere ver)
+        if (signInput.value === "+") {
+          resultadoFinal = numero1 + numero2;
+        } else if (signInput.value === "-") {
+          resultadoFinal = numero1 - numero2;
+        } else if (signInput.value === "*") {
+          resultadoFinal = numero1 * numero2;
+        } else if (signInput.value === "/") {
+          // Evitamos dividir por cero
+          if (numero2 === 0) {
+            resultadoFinal = "Error";
+          } else {
+            resultadoFinal = numero1 / numero2;
+          }
+        }
+
+        // Mostramos el resultado
+        resultInput.value = resultadoFinal;
+      }
     }
-  }
+
+    // BOTONES DE OPERADORES (+, -, *, /)
+    else if (
+      valorDelBoton === "+" ||
+      valorDelBoton === "-" ||
+      valorDelBoton === "*" ||
+      valorDelBoton === "/"
+    ) {
+      // Solo ponemos signo si ya hay un primer número y no hay resultado todavía
+      if (num1Input.value !== "" && resultInput.value === "") {
+        signInput.value = valorDelBoton;
+      }
+    }
+
+    // BOTONES DE NÚMEROS Y PUNTO
+    else {
+      // Si ya hay un resultado en pantalla y tocamos un número, limpiamos todo para empezar de cero
+      if (resultInput.value !== "") {
+        num1Input.value = valorDelBoton;
+        signInput.value = "";
+        num2Input.value = "";
+        resultInput.value = "";
+      }
+      // Si no hay signo todavía, estamos escribiendo el primer número
+      else if (signInput.value === "") {
+        num1Input.value = num1Input.value + valorDelBoton;
+      }
+      // Si ya hay signo, estamos escribiendo el segundo número
+      else {
+        num2Input.value = num2Input.value + valorDelBoton;
+      }
+    }
+  };
 }

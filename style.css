@@ -1,56 +1,49 @@
-*{
+* {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
 }
 
-body{
-  display: grid;
-  place-items: center;
+body {
+  display: flex; /* Cambiado a flex para centrar más fácil */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
   background-color: gainsboro;
 }
+
 header h1 {
-    margin: 0;
-    color: darkslategrey;
+  margin-bottom: 20px;
+  color: darkslategrey;
 }
 
-.calculator{
+.calculator {
   background: whitesmoke;
   width: 350px;
-  max-width: 100%;
   padding: 1.5rem;
   border-radius: 1.5rem;
   display: grid;
-  justify-content: flex-start;
-  grid-template-columns: repeat(4 ,1fr);
-  gap: 3px;
+  grid-template-columns: 25% 25% 25% 25%; /* Mucho más fácil de entender para principiantes */
+  gap: 5px;
 }
 
-.screen{
-  grid-column: 1/5;
+.screen {
+  grid-column: 1 / 5; /* Ocupa las 4 columnas */
   background-color: darkslategrey;
   padding: 1rem;
   border-radius: .5rem;
   margin-bottom: 1.2rem;
 }
 
-.screen-grid{
-  display: grid;
-  grid-template-columns: 1fr 0.5fr 1fr 1.5fr; /* n1 sign n2 result */
-  grid-template-areas: "n1 sign n2 res";
-  gap: 5px;
-  align-items: center;
+.screen-grid {
+  display: flex; /* Flexbox es ideal para poner cosas en fila */
+  justify-content: space-between;
 }
 
-.area-n1   { grid-area: n1;   }
-.area-sign { grid-area: sign; }
-.area-n2   { grid-area: n2;   }
-.area-res  { grid-area: res;  }
-
-.screen-grid input{
-  width: 100%;
+.screen-grid input {
+  width: 23%; /* 4 inputs caben perfectamente */
   text-align: center;
   border: 0;
   padding: .4rem .2rem;
@@ -59,29 +52,30 @@ header h1 {
   font-weight: bold;
 }
 
-.btn{
+.btn {
   background-color: darkslategrey;
   color: white;
   border: 0;
   padding: 1.3rem .5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-radius: 30px;
   cursor: pointer;
-  user-select: none;
   font-size: 1rem;
 }
 
-.btn:hover{
+.btn:hover {
   background-color: #004F78;
   font-weight: bold;
 }
 
-#zero{  grid-column: span 2; }
+#zero { 
+  grid-column: span 2; /* Ocupa dos espacios */
+}
 
-#equal{
-  grid-row: span 2;
+#equal {
+  grid-row: span 2; /* Ocupa dos filas hacia abajo */
   background-color: #e65766;
 }
-#equal:hover{ background-color: #e6394a; }
+
+#equal:hover { 
+  background-color: #e6394a; 
+}
