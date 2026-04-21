@@ -23,9 +23,8 @@ Error Handling: If you try to divide by zero, it shows an "Error" message so not
 ##  How to run it
 
 It's super simple:
-
-1. Download the files.
-2. Open index.html in your favorite browser.
+* Download the files.
+* Open index.html in your favorite browser.
 
 That’s it! Start crunching some numbers.
 
