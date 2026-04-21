@@ -5,12 +5,17 @@
   box-sizing: border-box;
 }
 
-/* ----------------  Layout general  -------------- */
 body{
   display: grid;
   place-items: center;
   min-height: 100vh;
   background-color: gainsboro;
+}
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    color: darkslategrey;
+    text-align: center;
 }
 
 .calculator{
@@ -24,7 +29,6 @@ body{
   gap: 3px;
 }
 
-/* ----------------  Pantalla  --------------------- */
 .screen{
   grid-column: 1/5;
   background-color: darkslategrey;
@@ -56,7 +60,6 @@ body{
   font-weight: bold;
 }
 
-/* ----------------  Botones  ---------------------- */
 .btn{
   background-color: darkslategrey;
   color: white;
