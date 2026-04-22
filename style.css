@@ -6,7 +6,7 @@
 }
 
 body {
-  display: flex; /* Cambiado a flex para centrar más fácil */
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -25,12 +25,12 @@ header h1 {
   padding: 1.5rem;
   border-radius: 1.5rem;
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%; /* Mucho más fácil de entender para principiantes */
+  grid-template-columns: 25% 25% 25% 25%; 
   gap: 5px;
 }
 
 .screen {
-  grid-column: 1 / 5; /* Ocupa las 4 columnas */
+  grid-column: 1 / 5;
   background-color: darkslategrey;
   padding: 1rem;
   border-radius: .5rem;
@@ -38,12 +38,12 @@ header h1 {
 }
 
 .screen-grid {
-  display: flex; /* Flexbox es ideal para poner cosas en fila */
+  display: flex; 
   justify-content: space-between;
 }
 
 .screen-grid input {
-  width: 23%; /* 4 inputs caben perfectamente */
+  width: 23%; 
   text-align: center;
   border: 0;
   padding: .4rem .2rem;
@@ -68,11 +68,11 @@ header h1 {
 }
 
 #zero { 
-  grid-column: span 2; /* Ocupa dos espacios */
+  grid-column: span 2;
 }
 
 #equal {
-  grid-row: span 2; /* Ocupa dos filas hacia abajo */
+  grid-row: span 2;
   background-color: #e65766;
 }
 
