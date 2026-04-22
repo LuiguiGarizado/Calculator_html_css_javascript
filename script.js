@@ -52,7 +52,6 @@ for (var i = 0; i < buttons.length; i++) {
         } else if (signInput.value === "*") {
           finalresult = number1 * number2;
         } else if (signInput.value === "/") {
-          // Evitamos dividir por cero
           if (number2 === 0) {
             finalresult = "Error";
           } else {
